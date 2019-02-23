@@ -1,0 +1,2 @@
+# Switch PHP version in CLI
+update-alternatives --config php
