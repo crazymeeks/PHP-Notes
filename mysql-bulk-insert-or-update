@@ -1,0 +1,21 @@
+$data = [];
+foreach($categories as $category){
+    $category_name = $category['category'];
+    $created_at    = $category['created_at'];
+    $updated_at    = $category['updated_at'];
+
+    $data[] = "('$category_name', '$created_at', '$updated_at')";
+}
+
+if (count($data) > 0) {
+    /**
+     * Since 'N DUPLICATE KEY UPDATE name = VALUES(name)' Does not work on
+     * SQLite. We used an alter which do the same with MySQL
+     * 
+     */
+    if (env('APP_ENV') === 'testing') {
+        $query = "REPLACE INTO `categories` (category, created_at, updated_at) VALUES " . implode(', ', $data);
+    } else {
+        $query = "INSERT INTO `categories` (category, created_at, updated_at) VALUES " . implode(', ', $data) . " ON DUPLICATE KEY UPDATE category = VALUES(category)";
+    }
+}
