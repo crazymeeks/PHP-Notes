@@ -1,2 +1,2 @@
-# Switch PHP version in CLI
-update-alternatives --config php
+# Switch PHP version
+update-alternatives --set php /usr/bin/php7.x
