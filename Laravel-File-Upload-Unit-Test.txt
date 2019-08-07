@@ -24,11 +24,15 @@ class AgeValidationDataProvider
                 'size' => 20000,
             ],
         ];
-        
+
         $uploadedFile = new UploadedFile($_FILES['image']['tmp_name'], $_FILES['image']['name']);
         $request = new Request();
 
         $request->files->set('image', $uploadedFile);
+
+        return [
+            array($request)
+        ];
     }
 
     
